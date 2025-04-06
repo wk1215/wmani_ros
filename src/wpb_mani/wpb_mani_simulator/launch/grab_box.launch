@@ -1,0 +1,13 @@
+<launch>
+
+    <include file="$(find wpb_mani_simulator)/launch/wpb_mani_boxes.launch"/>
+    <!-- 基于RGBD点云实现箱子的3D检测 -->
+    <node pkg="wpb_mani_behaviors" type="wpb_mani_boxes_3d"  name="wpb_mani_boxes_3d" output= "screen" />
+    <!-- 基于3D检测获得的位置结果,控制机器人抓取箱子 -->
+    <node pkg="wpb_mani_behaviors" type="wpb_mani_grab_box"  name="wpb_mani_grab_box"  output= "screen">
+        <rosparam file="$(find wpb_mani_simulator)/config/wpb_mani_sim.yaml" command="load" />
+    </node>
+    <!-- 发布检测任务,以及基于检测结果发布抓取任务 -->
+    <node pkg="wpb_mani_tutorials" type="wpb_mani_grab_height"  name="wpb_mani_grab_demo" output= "screen" />
+
+</launch>

@@ -1,0 +1,17 @@
+services:
+  ego_planer:
+    image: focal-noetic-ego:3.0
+    container_name: wpb_mani
+    privileged: true
+    tty: true
+    stdin_open: true
+    network_mode: "host"
+    ipc: host
+    restart: no
+    environment:
+      - DISPLAY=${DISPLAY}     
+      - QT_X11_NO_MITSHM=1    
+    volumes:
+      - /dev:/dev
+      - ~/wangkang14/project/wpb_mani:/ros2_ws
+      - /tmp/.X11-unix:/tmp/.X11-unix 

@@ -1,0 +1,25 @@
+ARG ROS_DISTRO=galactic
+FROM ros:${ROS_DISTRO}-ros-base-focal
+
+ARG ROS_DISTRO=galactic
+ARG WORK_SPACE=/ros2_ws
+WORKDIR ${WORK_SPACE}
+COPY ./src ./src
+
+SHELL ["/bin/bash", "-c"]
+
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash && \
+    apt-get update && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    ros-${ROS_DISTRO}-tf2 \
+    ros-${ROS_DISTRO}-pcl-conversions \
+    ros-${ROS_DISTRO}-pcl-ros \
+    libyaml-cpp-dev \
+    libeigen3-dev && \
+    colcon build && \
+    rm -rf ./build ./log && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /root/.bashrc 
+
+ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["bash"]
