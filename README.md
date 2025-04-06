@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 复合机器人导航及抓取
 实现一种复合机器人(底盘麦轮AGV+四自由度机械臂)对未知地形建图,并实现对地形房间内盒子进行3D检测和空间抓取
 
@@ -76,4 +77,4 @@ roslaunch wpb_mani_simulator map_tools.launch
 rosrun wpb_mani_tutorials  wpb_mani_grab_demo
 ```
 
-***
+*** 
